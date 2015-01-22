@@ -1,0 +1,18 @@
+Build manual TestFrame sources.
+
+Prequisites:
+- Install Microsoft Visual Studio 2013 Premium or higher.
+- Download and install: Multibyte MFC Library for Visual Studio 2013
+  http://www.microsoft.com/en-us/download/details.aspx?id=40770
+- Install Innosetup http://www.jrsoftware.org/isinfo.php
+- Get TestFrame engine sources
+
+1. Unpack the engine source in a directory. ${TF_SOURCE}
+2. Open the Engine6 solution in Visual Studio 2012. VS Project is located in ${TF_SOURCE}/TFEngine/Sources.
+3. The build type must be set to �Release�. To do so, select the �Engine6� project in the solution explorer. Then right mouse click, then properties. Select Configuration properties --> Configuration.
+4. All project contexts must have Configuration value �Release� and click OK
+5. Select BUILD ? Rebuild solution. (takes a few minutes)
+6. Go to ${TF_SOURCE}/TFEngine/Deployment
+7. Open the TestFrame Engine.iss with Innosetup.
+8. Run the installation script via Run --> Run (F9).
+9. Now the installation executable is created and launched. The distributable executable can be found in  ${TF_SOURCE}/TFEngine/Deployment.
