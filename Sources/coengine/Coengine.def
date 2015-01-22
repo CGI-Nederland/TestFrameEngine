@@ -1,0 +1,141 @@
+;******************************************************************************
+;*$Workfile: Coengine.def $
+;*$Revision: 20 $
+;*$Modtime: 10/23/01 10:33a $
+;*$Author: Lw $
+;******************************************************************************
+;*
+;*	COPYRIGHT (C) 1999-2001 CGI NEDERLAND B.V. - ALL RIGHTS RESERVED
+;*
+;******************************************************************************
+
+
+LIBRARY "Coengine"
+;DESCRIPTION "TestFrame Engine"
+
+EXPORTS
+;/////////////////////////////////////////
+;//	Action Word Registration
+;/////////////////////////////////////////
+
+	tfe_RegisterActionWord			@1
+	tfe_RegisterHeaderWord			@2
+	tfe_CreateActionWordSynonym		@3
+	tfe_UnregisterActionWord		@4
+	tfe_UnregisterHeaderWord		@5
+	tfe_UnregisterAllActionWords	@6
+
+
+;/////////////////////////////////////////
+;//	State Control
+;/////////////////////////////////////////
+
+	tfe_StartEngine					@50
+	tfe_StopEngine					@51
+	tfe_ResetEngine					@52
+
+;/////////////////////////////////////////
+;//	Report Generating
+;/////////////////////////////////////////
+
+	tfe_GenerateReport				@100
+	tfe_GenerateReportFromLog		@101
+
+;/////////////////////////////////////////
+;//	Testflow
+;/////////////////////////////////////////
+
+	tfe_ProcessNextLine				@150
+
+;/////////////////////////////////////////
+;//	Runtime Information
+;/////////////////////////////////////////
+
+	tfe_GetActionWord				@200
+	tfe_GetActionWordFunction		@201
+	tfe_GetArgument					@202
+	tfe_GetNumberOfArguments		@203
+	tfe_GetTestCase					@204
+	tfe_GetTestCondition			@205
+	tfe_GetSection					@206
+	tfe_GetScenario					@207
+	tfe_GetClusterFile				@208
+	tfe_GetLineNumber				@209
+	tfe_GetNumberOfErrors			@210
+	tfe_GetLatestError				@211
+	tfe_GetArgumentDescription		@212
+	tfe_GetCopyright				@213
+	tfe_GetVersion					@214
+	tfe_GetBuild					@215
+	tfe_GetParameter				@216
+	tfe_GetNumberOfParameters		@217
+	tfe_GetParameterDescription		@218
+	tfe_GetLogFile					@219
+
+;/////////////////////////////////////////
+;//	Reporting
+;/////////////////////////////////////////
+
+	tfe_ReportComment				@250
+	tfe_ReportError					@251
+
+;/////////////////////////////////////////
+;//	Checking
+;/////////////////////////////////////////
+
+	tfe_CheckString					@300
+	tfe_CheckArgument				@301
+	tfe_ReportCheck					@302
+	tfe_CheckParameter				@303
+
+;/////////////////////////////////////////
+;//	Cluster Variables
+;/////////////////////////////////////////
+
+	tfe_KeepArgument				@350
+	tfe_KeepParameter				@351
+
+;/////////////////////////////////////////
+;//	GUI
+;/////////////////////////////////////////
+
+	tfe_DisplayMessage				@400
+
+;/////////////////////////////////////////
+;// License
+;/////////////////////////////////////////
+
+	tfe_CheckLicense				@500
+
+;/////////////////////////////////////////
+;//	Support Old Engine Interface
+;/////////////////////////////////////////
+
+	eng_start						@1000
+	eng_stop						@1001
+	eng_read_setting				@1002
+	eng_write_setting				@1003
+	eng_message						@1004
+	eng_action						@1005
+	eng_argument					@1006
+	eng_argument_count				@1007
+	eng_check_argument				@1008
+	eng_keep_argument				@1009
+	eng_line						@1010
+	eng_line_count					@1011
+	eng_check_value					@1012
+	eng_report						@1013
+	eng_register_actionword			@1014
+
+	eng_status						@1016
+	eng_copyright					@1017
+	eng_version						@1018
+	eng_error						@1019
+	eng_date_argument				@1020
+	eng_unregister_actionword		@1021
+	eng_register_headerword			@1022
+	eng_create_synonym				@1023
+	eng_unregister_all_actionwords	@1024
+	eng_legend						@1025
+
+;/////////////////////////////////////////

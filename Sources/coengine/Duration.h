@@ -1,0 +1,222 @@
+/*****************************************************************************
+ * $Workfile: Duration.h $
+ * $Revision: 1 $
+ * $Modtime: 8/17/01 2:25p $
+ * $Author: Lw $
+ ******************************************************************************
+ *
+ *	COPYRIGHT (C) 2001 CGI NEDERLAND B.V. - ALL RIGHTS RESERVED
+ *
+ ******************************************************************************/
+
+#ifndef DURATION_H
+#define DURATION_H
+
+// Includes
+#include <string>
+
+using namespace std;
+
+////////////////////////////////////////////////////////////////////////////////
+// class Duration
+
+class Duration
+{
+// Construction and destruction
+public:
+	///////////////////////////////////////////////////////////////////////////////
+	// default constructor
+	///////////////////////////////////////////////////////////////////////////////
+	Duration();
+
+	///////////////////////////////////////////////////////////////////////////////
+	// constructor
+	//
+	// parameters	:	lDay			days
+	//					lHour			hours
+	//					lMin			minutes
+	//					lSec			seconds
+	//					lMillisec		milliseconds
+	///////////////////////////////////////////////////////////////////////////////
+	Duration( long lDay, long lHour, long lMin, long lSec, long lMillisec );
+
+	///////////////////////////////////////////////////////////////////////////////
+	// destructor
+	///////////////////////////////////////////////////////////////////////////////
+	~Duration();
+
+	///////////////////////////////////////////////////////////////////////////////
+	// default copy constructor (note: not private!)
+	///////////////////////////////////////////////////////////////////////////////
+	Duration( const Duration& src );
+
+// Operators
+public:
+	///////////////////////////////////////////////////////////////////////////////
+	// operator		:	+
+	//
+	// description	:	This operator adds two Duration objects.
+	//
+	// parameters	:	durRight		right operand is other Duration object
+	//
+	// returns		:	Duration object specifying the total of the two
+	///////////////////////////////////////////////////////////////////////////////
+	Duration operator +( const Duration& durRight );
+
+	///////////////////////////////////////////////////////////////////////////////
+	// operator		:	-
+	//
+	// description	:	This operator subtracts two Duration objects.
+	//
+	// parameters	:	durRight		right operand is other Duration object
+	//
+	// returns		:	Duration object specifying the difference of the two
+	///////////////////////////////////////////////////////////////////////////////
+	Duration operator -( const Duration& durRight );
+
+	///////////////////////////////////////////////////////////////////////////////
+	// operator		:	*
+	//
+	// description	:	This operator multiplies the Duration with a factor.
+	//
+	// parameters	:	nFactor		factor with which to multiply
+	//
+	// returns		:	Duration object specifying the multiplied duration
+	///////////////////////////////////////////////////////////////////////////////
+	Duration operator *( int nFactor );
+
+// Public interface
+public: 
+	///////////////////////////////////////////////////////////////////////////////
+	// function		:	Set()
+	//
+	// description	:	This function sets the time-members, calculating them to
+	//					values in range.
+	//
+	// parameters	:	lDay			days
+	//					lHour			hours
+	//					lMin			minutes
+	//					lSec			seconds
+	//					lMillisec		milliseconds
+	//
+	// returns		:	-
+	///////////////////////////////////////////////////////////////////////////////
+	void Set( long lDay, long lHour, long lMin, long lSec, long lMillisec );
+
+	///////////////////////////////////////////////////////////////////////////////
+	// function		:	GetDay()
+	//
+	// description	:	This function returns the number of days.
+	//
+	// parameters	:	-
+	//
+	// returns		:	number of days
+	///////////////////////////////////////////////////////////////////////////////
+	long GetDay() const;
+
+	///////////////////////////////////////////////////////////////////////////////
+	// function		:	GetHour()
+	//
+	// description	:	This function returns the number of hours.
+	//
+	// parameters	:	-
+	//
+	// returns		:	number of hours [-23..23]
+	///////////////////////////////////////////////////////////////////////////////
+	int GetHour() const;
+
+	///////////////////////////////////////////////////////////////////////////////
+	// function		:	GetMin()
+	//
+	// description	:	This function returns the number of minutes.
+	//
+	// parameters	:	-
+	//
+	// returns		:	number of minutes [-59..59]
+	///////////////////////////////////////////////////////////////////////////////
+	int GetMin() const;
+
+	///////////////////////////////////////////////////////////////////////////////
+	// function		:	GetSec()
+	//
+	// description	:	This function returns the number of seconds.
+	//
+	// parameters	:	-
+	//
+	// returns		:	number of seconds [-59..59]
+	///////////////////////////////////////////////////////////////////////////////
+	int GetSec() const;
+
+	///////////////////////////////////////////////////////////////////////////////
+	// function		:	GetMillisec()
+	//
+	// description	:	This function returns the number of milliseconds.
+	//
+	// parameters	:	-
+	//
+	// returns		:	number of milliseconds [-999...999]
+	///////////////////////////////////////////////////////////////////////////////
+	int GetMillisec() const;
+
+	///////////////////////////////////////////////////////////////////////////////
+	// function		:	IsNegative()
+	//
+	// description	:	This function states whether or not the duration is
+	//					negative.
+	//
+	// parameters	:	-
+	//
+	// returns		:	true	duration is negative
+	//					false	duration is not negative
+	///////////////////////////////////////////////////////////////////////////////
+	bool IsNegative();
+
+	///////////////////////////////////////////////////////////////////////////////
+	// function		:	Get()
+	//
+	// description	:	This function returns a string which is the specified
+	//					format string in which the special tokens are replaced
+	//					by the corresponding time-members.
+	//					The special tokens are:
+	//					D		day
+	//					h		hour
+	//					hh		hour (with leading zero)
+	//					m		minutes
+	//					mm		minutes (with leading zero)
+	//					s		seconds
+	//					ss		seconds (with leading zero)
+	//					n		milliseconds
+	//					nnn		milliseconds (with leading zeros)
+	//
+	// parameters	:	strFormat		format string
+	//
+	// returns		:	duration in specified format
+	///////////////////////////////////////////////////////////////////////////////
+	string Get( const string& strFormat );
+
+// Implementation		
+private:
+	///////////////////////////////////////////////////////////////////////////////
+	// function		:	ToggleSign()
+	//
+	// description	:	This function toggles the sign of all time-members.
+	//
+	// parameters	:	-
+	//
+	// returns		:	-
+	///////////////////////////////////////////////////////////////////////////////
+	void ToggleSign();
+
+// Member variables
+private:
+	long m_lDay;		// Number of days
+	int m_nHour;		// Number of hours
+	int m_nMin;			// Number of minutes
+	int m_nSec;			// Number of seconds
+	int m_nMillisec;	// Number of milliseconds
+};
+
+////////////////////////////////////////////////////////////////////////////////
+
+#endif // !DURATION_H
+ 

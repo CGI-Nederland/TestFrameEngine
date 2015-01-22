@@ -1,0 +1,21 @@
+;******************************************************************************
+;*$Workfile: MessageCentre.def $
+;*$Revision: 2 $
+;*$Modtime: 3-05-01 9:54 $
+;*$Author: Etb $
+;******************************************************************************
+;*
+;*	COPYRIGHT (C) 1999 CGI NEDERLAND B.V. - ALL RIGHTS RESERVED
+;*
+;******************************************************************************
+
+
+LIBRARY      "MessageCentre"
+;DESCRIPTION  'MessageCentre Windows Dynamic Link Library'
+
+EXPORTS
+ 
+	emc_Start			@01
+	emc_Stop			@02
+
+;******************************************************************************

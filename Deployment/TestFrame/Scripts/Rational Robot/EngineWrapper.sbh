@@ -1,0 +1,121 @@
+'################################################################################
+'#  ENGINE WRAPPER FOR RATIONAL ROBOT © 1999-2007 LogicaCMG NEDERLAND B.V.
+'#
+'#  Description     :   This file is the Engine wrapper for Rational Robot.           
+'#                      It contains the functions "ProcessCluster" and
+'#                      "HandleInvalidEngineStart".
+'#
+'#  Version         :   6.0.58.0
+'#  Author          :   Leon Wolters, Edwin Wolters, Andre hooijmans
+'#  Created on      :   07-02-2000
+'#  Last update on  :   06-02-2007
+'################################################################################
+
+'# Declaration of Engine 6.0.58.0 object
+'##########################################
+global tfe as object
+
+'# Declaration of Engine 6.0.58.0 constants.
+'##########################################
+
+' Error codes
+Global const codeWARN  = 0
+Global const codeERROR = 1
+Global const codeCHCK  = 2
+Global const codeFATAL = 3
+
+'******************************************************************************************
+'*  Function    :   HandleInvalidEngineStart
+'*
+'*  Description :   This function handles an invalid start of Engine 6.0. It displays a
+'*                  message box stating Engine 6.0 could not be started and starts up
+'*                  Notepad showing error.log, the file that has the details about why
+'*                  Engine 6.0 could not be started.
+'*
+'*  Parameters  :   strIniFile      string containing engine ini file
+'*
+'*  Return      :   default 0
+'******************************************************************************************
+Function        HandleInvalidEngineStart _
+( _
+                strIniFile As String _
+) As Integer
+
+    Dim strTitle As String      ' title of the message box
+    Dim strMessage As String    ' message to display
+
+    ' Create the message.
+    strTitle = "ENGINE 6.0 COULD NOT BE STARTED"
+    strMessage = "Possible reasons why Engine 6.0 could not be started:" & Chr(10)
+    strmessage = strMessage & Chr(10)
+    strMessage = strMessage & "* the specified cluster could not be opened." & Chr(10)
+    strMessage = strMessage & "* the license file license.key could not be found." & Chr(10)
+    strMessage = strMessage & "* the license file contains an invalid license key." & Chr(10)
+    strMessage = strMessage & "* one or more settings of Engine 6.0 as set in the ini file" & Chr(10)
+    strMessage = strMessage & "  '" & strIniFile & "' are invalid." & Chr(10)
+    strmessage = strMessage & Chr(10)
+    strmessage = strMessage & "Check the file error.log in the working directory for more details."
+
+    ' Display the message.
+    MsgBox strMessage, 48, strTitle
+
+    ' Call Notepad to display the file error.log.
+    StartApplication "notepad " & CurDir & "\error.log"
+
+    HandleInvalidEngineStart = 0
+
+End Function
+
+'******************************************************************************************
+'*  Function    :   ProcessCluster
+'*
+'*  Description :   This function processes the cluster strClusterFile using settings from
+'*                  the ini file strIniFile. When the cluster is finished a report
+'*                  strReportFile is generated.
+'*
+'*  Parameters  :   strClusterFile  string containing cluster file
+'*                  strReportFile   string containing report file
+'*                  strIniFile      string containing engine ini file
+'*
+'*  Return      :   1   Engine 6.0 successfully processed cluster
+'*                  0   Engine 6.0 could not be started
+'******************************************************************************************
+Function ProcessCluster _
+( _
+    strClusterFile As String, _
+    strReportFile As String, _
+    strIniFile As String _
+) As Integer
+
+    Dim nResult As Integer      ' result of ProcessCluster
+    Dim i As Integer            ' counter
+
+    ' Start the engine.
+    nResult = tfe.StartEngine( strClusterFile, strReportFile, strIniFile )
+
+    ' check the result
+    If nResult = 1 then
+    
+        ' Process each test line until none are left.
+        Do While tfe.ProcessNextLine <> 0
+    
+            ' Execute script containing action word function.
+            CallScript tfe.GetActionWordFunction
+
+        Loop
+
+        ' Stop the engine and generate the report.
+        Call tfe.StopEngine
+        Call tfe.GenerateReport
+        
+    Else
+    
+        ' Handle invalid start of the Engine.
+        HandleInvalidEngineStart( strIniFile )
+
+    End If
+
+    ProcessCluster = nResult
+
+End Function
+

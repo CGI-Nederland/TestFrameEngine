@@ -1,0 +1,63 @@
+################################################################################
+#	EXAMPLE_LIB	© 1999-2007 LogicaCMG NEDERLAND B.V.
+#
+#	Description		:	Library containing action word functions used in the example.
+#	Version			:	6.0.58.0
+#	Author			:	Leon Wolters, Andre hooijmans
+#	Created on		:	17-01-2000
+#	Last update on	:	06-02-2007
+################################################################################
+
+#*****************************************************************************************
+# Function			:	print_some_numbers
+#
+# Description		:	This function places the action word's first three parameters as comment in the report.
+#
+# AW parameters	:	1	first number
+#					2	second number
+#					3	third number
+#*****************************************************************************************
+public function print_some_numbers()
+{
+	# Report parameters 1, 2, and 3 as comment.
+	tfe_ReportComment( tfe_GetParameter( 1 ) );
+	tfe_ReportComment( tfe_GetParameter( 2 ) );
+	tfe_ReportComment( tfe_GetParameter( 3 ) );
+
+	# Wait 500 ms so this example takes several seconds at least.
+	wait( 0, 500 );
+}
+
+#*****************************************************************************************
+# Function		:	perform_a_check
+#
+# Description	:	This function checks the action word's first parameter against the 
+#					value of its second parameter.
+#
+# AW parameters	:	1	first message
+#					2	second message
+#*****************************************************************************************
+public function perform_a_check()
+{
+	# Check parameter 1 against the value of parameter 2.
+	tfe_CheckParameter( 1, tfe_GetParameter( 2 ) );
+
+	# Wait 500 ms so this example takes several seconds at least.
+	wait( 0, 500 );
+}
+
+#*****************************************************************************************
+# Function			:	print_an_error
+#
+# Description		:	This function reports the value of its first parameter as an error.
+#
+# AW parameters	:	1	error message
+#*****************************************************************************************
+public function print_an_error()
+{
+	# Report the value of parameter 1 as an error with code codeERROR.
+	tfe_ReportError( tfe_GetParameter( 1 ), codeERROR );
+
+	# Wait 500 ms so this example takes several seconds at least.
+	wait( 0, 500 );
+}

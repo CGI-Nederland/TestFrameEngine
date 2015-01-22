@@ -1,0 +1,174 @@
+################################################################################
+#	ENGINE WRAPPER FOR WINRUNNER © 1999-2007 LogicaCMG NEDERLAND B.V.
+#
+#	Description		:	This file is the TestFrame Engine wrapper for WinRunner.
+#						It declares the interface functions of the Engine.
+#						It contains the functions "ProcessCluster" and "HandleInvalidEngineStart".
+#	Version			:	6.0.58.0
+#	Author			:	Leon Wolters, Andre Hooijmans
+#	Created on		:	23-12-1999
+#	Last update on	:	07-01-2007
+################################################################################
+
+# Declaration of the Engine interface functions
+################################
+
+# Action Word Registration
+extern int		tfe_RegisterActionWord( string strActionWord, string strActionWordFunction );
+extern int		tfe_RegisterHeaderWord( string strHeaderWord, string strReportTag );
+extern int		tfe_CreateActionWordSynonym( string strActionWord, string strSynonym );
+extern int		tfe_UnregisterActionWord( string strActionWord );
+extern int		tfe_UnregisterHeaderWord( string strHeaderWord );
+extern int		tfe_UnregisterAllActionWords( );
+
+# State Control
+extern int		tfe_StartEngine( string strClusterFilename, string strReportFilename, string strIniFile );
+extern int		tfe_StopEngine( );
+extern int		tfe_ResetEngine( );
+
+# Report Generating
+extern int		tfe_GenerateReport( );
+extern int		tfe_GenerateReportFromLog( string strLogFilename, string strReportFilename, string strIniFile );
+
+# Test Flow
+extern int		tfe_ProcessNextLine( );
+
+# Run Time Information
+extern string	tfe_GetActionWord( );
+extern string	tfe_GetActionWordFunction( );
+extern string	tfe_GetArgument( int Index );
+extern string	tfe_GetParameter( int Index );
+extern int		tfe_GetNumberOfArguments( );
+extern int		tfe_GetNumberOfParameters( );
+extern string	tfe_GetTestCase( );
+extern string	tfe_GetTestCondition( );
+extern string	tfe_GetSection( );
+extern string	tfe_GetScenario( );
+extern string	tfe_GetClusterFile( );
+extern int		tfe_GetLineNumber( );
+extern int		tfe_GetNumberOfErrors( );
+extern string	tfe_GetLatestError( );
+extern string	tfe_GetArgumentDescription( int nIndex );
+extern string	tfe_GetParameterDescription( int nIndex );
+extern string	tfe_GetCopyright( );
+extern string	tfe_GetVersion( );
+extern string	tfe_GetBuild( );
+extern string	tfe_GetLogFile( );
+
+# Reporting
+extern int		tfe_ReportComment( string strComment );
+extern int		tfe_ReportError( string strErrorText, int nErrorTypeCode );
+extern int		tfe_ReportCheck( string strDescription, string strExpected, string strRecorded, int nCheckResult );
+
+# Checking
+extern int		tfe_CheckString( string strDescription, string strExpected, string strRecorded );
+extern int		tfe_CheckArgument( int nIndex, string strRecorded );
+extern int		tfe_CheckParameter( int nIndex, string strRecorded );
+
+# Cluster variables
+extern int		tfe_KeepArgument( int nArgument, string strKeepValue );
+extern int		tfe_KeepParameter( int nParameter, string strKeepValue );
+
+# GUI
+extern int		tfe_DisplayMessage( string strMessage );
+
+# Declaration of Engine constants
+##########################
+
+# Error codes
+const codeWARN	= 0;
+const codeERROR	= 1;
+const codeCHCK	= 2;
+const codeFATAL	= 3;
+
+#*****************************************************************************************
+# Function		:	HandleInvalidEngineStart
+#
+# Description	:	This function handles an invalid start of the Engine. It displays a message box starting the Engine
+#					could not be started, and starts up Notepad showing error.log, the file that has the details about
+#					why the Engine could not be started.
+#
+# Parameters	:	strIniFile		string containing engine ini file
+#
+# Return		:	-
+#*****************************************************************************************
+public function HandleInvalidEngineStart
+(
+	strIniFile
+)
+{
+	auto 	strMessage, 	# message to display
+			strTempdir,		# WinRunner's temporary directory
+			strErrorLog;	# name and path of the Engine's error log
+
+	# Create the message to display.
+	strMessage = "ENGINE COULD NOT BE STARTED\n";
+	strMessage = strMessage & "\n";
+	strMessage = strMessage & "This can be because:\n";
+	strMessage = strMessage & "* the specified cluster could not be opened.\n";
+	strMessage = strMessage & "* the license file license.key could not be found.\n";
+	strMessage = strMessage & "* the license file contains an invalid license key.\n";
+	strMessage = strMessage & "* one or more settings of the Engine as set in the ini file\n";
+	strMessage = strMessage & "  \"" & strIniFile & "\" are invalid.\n";
+	strMessage = strMessage & "\n";
+	strMessage = strMessage & "Check the file error.log in the working directory for more details.\n";
+	strMessage = strMessage & "Press Continue to view the error log.";
+
+	# Display the message.
+	pause( strMessage );
+
+	# Call notepad to display the file error.log (include your own application and path to view this file).
+	strTempdir = getvar( "tempdir" );
+	strErrorLog = substr( strTempdir, 1, index(strTempdir, "\\tmp") ) & "arch\\error.log";
+
+	invoke_application( "notepad", strErrorLog, "", SW_SHOWMAXIMIZED );
+}
+
+#*****************************************************************************************
+# Function		:	ProcessCluster
+#
+# Description	:	This function processes the cluster strClusterFile using settings from the ini file strIniFile. 
+#					When the cluster is finished, a report strReportFile is generated.
+#
+# Parameters	:	strClusterFile	string containing cluster file
+#					strReportFile	string containing report file
+#					strIniFile		string containing engine ini file
+#
+# Return		:	1	Engine successfully processed cluster
+#					0	Engine could not be started
+#*****************************************************************************************
+public function ProcessCluster
+(
+	strClusterFile, 
+	strReportFile, 
+	strIniFile
+)
+{
+	auto	nResult = 0,	# result of ProcessCluster
+			i;				# counter
+
+	# Start the Engine.
+	nResult = tfe_StartEngine( strClusterFile, strReportFile, strIniFile );
+
+	# Determine if tfe_StartEngine was successful.
+	if ( nResult == 1 )
+	{
+		# Process each test line until none are left.
+		while ( tfe_ProcessNextLine( ) != 0 )
+		{
+			# Execute the action word function corresponding with the action word of the current test line.
+			eval( tfe_GetActionWordFunction( ) );
+		}
+
+		# Stop the engine and generate the report.
+		tfe_StopEngine( );
+		tfe_GenerateReport( );
+	}
+	else
+	{
+		# Handle the invalid start of the Engine.
+		HandleInvalidEngineStart( strIniFile );
+	}
+
+	return nResult;
+}

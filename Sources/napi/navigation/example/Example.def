@@ -1,0 +1,34 @@
+;******************************************************************************
+;*$Workfile: Example.def $
+;*$Revision: 1 $
+;*$Modtime: 01/16/06 11:21a $
+;*$Author: Ws $
+;******************************************************************************
+;*
+;*	COPYRIGHT (C) 1999-2006 CGI NEDERLAND B.V. - ALL RIGHTS RESERVED
+;*
+;******************************************************************************
+
+
+LIBRARY "Example"
+;DESCRIPTION "NAPI Example DLL"
+
+EXPORTS
+
+	napi_GetNAPIVersion				@10
+	napi_GetNAPIBuildNumber			@11
+	
+	napi_GetLibraryName				@20
+	napi_GetLibraryVersion			@21
+	napi_GetLibraryBuildNumber		@22
+	napi_GetLibraryInfo				@23
+	napi_GetLibraryAuthor			@24
+	
+	napi_GetNumberOfActionWords		@30
+	
+	napi_ExecuteActionWord			@40
+
+	napi_RegisterActionWords		@50
+	napi_UnregisterActionWords		@51
+
+;/////////////////////////////////////////

@@ -1,0 +1,84 @@
+################################################################################
+#	EXAMPLE_MAIN © 1999-2007 LogicaCMG NEDERLAND B.V.
+#
+#	Description		:	Main script for the example
+#	Version			:	6.0.58.0
+#	Author			:	Leon Wolters, Andre hooijmans
+#	Created on		:	17-01-2000
+#	Last update on	:	06-02-2007
+################################################################################
+
+#*****************************************************************************************
+# Function		:	RegisterActionWords
+#
+# Description	:	This function registers the action words used in the test.
+#					Include the registration of your own action words here.
+#
+# Parameters	:	-
+#
+# Return		:	-
+#*****************************************************************************************
+public function RegisterActionWords( )
+{
+	tfe_RegisterActionWord( "print some numbers", "print_some_numbers();" );
+	tfe_RegisterActionWord( "perform a check", "perform_a_check();" );
+	tfe_RegisterActionWord( "print an error", "print_an_error();" );
+}
+
+#*****************************************************************************************
+# Function		:	Main
+#
+# Description	:	This function is the main script of the test, the starting point.
+#
+# Parameters	:	-
+#
+# Return		:	-
+#*****************************************************************************************
+public function Main( )
+{
+	# Declare constants.
+	const TFPATH =	 "C:\\TestFrame\\";
+
+	# Declare variables.
+	auto	strCoengine,	# name and path of coengine dll
+			strClusterFile,	# name and path of cluster file
+			strReportFile,	# name and path of report file
+			strIniFile,		# name and path of ini file
+			strGUIFile;		# name and path of GUI file
+
+	# Load coengine.dll.
+	strCoengine = TFPATH & "bin\\coengine.dll";
+	load_dll( strCoengine );
+
+	# Load the Engine wrapper.
+	reload( "EngineWrapper" );
+
+	# Load test libraries - include here your own libraries.
+	reload( "Example_lib" );
+
+	# Reset the the Engine (in case the previous WinRunner script was ended abnormally.)
+	tfe_ResetEngine( );
+
+	# Register the action words.
+	RegisterActionWords( );
+
+	# Define cluster, report and ini file.
+	strClusterFile	= TFPATH & "Cluster\\Example.txt";
+	strReportFile 	= TFPATH & "Report\\ExampleReport.rtf";
+	strIniFile		= TFPATH & "engine.ini";
+
+	# Start processing the cluster; call the function ProcessCluster from the wrapper.
+	ProcessCluster( strClusterFile, strReportFile, strIniFile );
+
+	# Unload the dll.
+	unload_dll( strCoengine );
+
+	# Call report - include the correct application to view the report and the correct report file.
+	invoke_application( "wordpad", strReportFile, "", SW_SHOWMAXIMIZED );
+}
+
+# Start the test.
+Main( );
+
+# Stop the test.
+texit;

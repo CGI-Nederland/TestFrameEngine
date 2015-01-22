@@ -1,0 +1,172 @@
+//(Description) = Engine wrapper for QARun
+//(Comment) = 
+
+;######################################################################################
+;#  ENGINE WRAPPER FOR QARUN © 1999-2007 LogicaCMG NEDERLAND B.V.
+;#
+;#  Description     :   This file is the Engine wrapper for QARun.
+;#                      It declares the interface functions of Engine 6.0.58.0 
+;#                      It contains the functions "ProcessCluster" and
+;#                      "HandleInvalidEngineStart".
+;#  Version         :   6.0.58.0
+;#  Author          :   Leon Wolters, Andre Hooijmans
+;#  Created on      :   14-01-2000
+;#  Last update on  :   06-02-2007
+;######################################################################################
+
+;# Declaration of Engine 6.0.58.0 interface functions
+;###################################################
+
+; Action Word Registration
+Declare DllFunc "int tfe_RegisterActionWord(str, str) coengine"         tfe_RegisterActionWord
+Declare DllFunc "int tfe_RegisterHeaderWord(str, str) coengine"         tfe_RegisterHeaderWord
+Declare DllFunc "int tfe_CreateActionWordSynonym(str, str) coengine"    tfe_CreateActionWordSynonym
+Declare DllFunc "int tfe_UnregisterActionWord(str) coengine"            tfe_UnregisterActionWord
+Declare DllFunc "int tfe_UnregisterHeaderWord(str) coengine"            tfe_UnregisterHeaderWord
+Declare DllFunc "int tfe_UnregisterAllActionWords() coengine"           tfe_UnregisterAllActionWords
+
+; State Control
+Declare DllFunc "int tfe_StartEngine(str, str, str) coengine"           tfe_StartEngine
+Declare DllFunc "int tfe_StopEngine() coengine"                         tfe_StopEngine
+Declare DllFunc "int tfe_ResetEngine() coengine"                        tfe_ResetEngine
+
+; Report Generating
+Declare DllFunc "int tfe_GenerateReport() coengine"                     tfe_GenerateReport
+Declare DllFunc "int tfe_GenerateReportFromLog(str, str, str) coengine" tfe_GenerateReportFromLog
+
+; Test Flow
+Declare DllFunc "int tfe_ProcessNextLine() coengine"                    tfe_ProcessNextLine
+
+; Run Time Information
+Declare DllFunc "str tfe_GetActionWord() coengine"                      tfe_GetActionWord
+Declare DllFunc "str tfe_GetActionWordFunction() coengine"              tfe_GetActionWordScript         ; Note the name change
+Declare DllFunc "str tfe_GetArgument(int) coengine"                     tfe_GetArgument
+Declare DllFunc "str tfe_GetParameter(int) coengine"                    tfe_GetParameter
+Declare DllFunc "int tfe_GetNumberOfArguments() coengine"               tfe_GetNumberOfArguments
+Declare DllFunc "int tfe_GetNumberOfParameters() coengine"              tfe_GetNumberOfParameters
+Declare DllFunc "str tfe_GetTestCase() coengine"                        tfe_GetTestCase
+Declare DllFunc "str tfe_GetTestCondition() coengine"                   tfe_GetTestCondition
+Declare DllFunc "str tfe_GetSection() coengine"                         tfe_GetSection
+Declare DllFunc "str tfe_GetScenario() coengine"                        tfe_GetScenario
+Declare DllFunc "str tfe_GetClusterFile() coengine"                     tfe_GetClusterFile
+Declare DllFunc "int tfe_GetLineNumber() coengine"                      tfe_GetLineNumber
+Declare DllFunc "int tfe_GetNumberOfErrors() coengine"                  tfe_GetNumberOfErrors
+Declare DllFunc "str tfe_GetLatestError() coengine"                     tfe_GetLatestError
+Declare DllFunc "str tfe_GetArgumentDescription(int) coengine"          tfe_GetArgumentDescription
+Declare DllFunc "str tfe_GetParameterDescription(int) coengine"         tfe_GetParameterDescription
+Declare DllFunc "str tfe_GetCopyright() coengine"                       tfe_GetCopyright
+Declare DllFunc "str tfe_GetVersion() coengine"                         tfe_GetVersion
+Declare DllFunc "str tfe_GetBuild() coengine"                           tfe_GetBuild
+Declare DllFunc "str tfe_GetLogFile() coengine"                         tfe_GetLogFile
+
+; Reporting
+Declare DllFunc "int tfe_ReportComment(str) coengine"                   tfe_ReportComment
+Declare DllFunc "int tfe_ReportError(str, int) coengine"                tfe_ReportError
+Declare DllFunc "int tfe_ReportCheck(str,str,str,int) coengine"         tfe_ReportCheck
+
+; Checking
+Declare DllFunc "int tfe_CheckString(str, str, str) coengine"           tfe_CheckString
+Declare DllFunc "int tfe_CheckArgument(int, str) coengine"              tfe_CheckArgument
+Declare DllFunc "int tfe_CheckParameter(int, str) coengine"             tfe_CheckParameter
+
+; Cluster variables
+Declare DllFunc "int tfe_KeepArgument(int, str) coengine"               tfe_KeepArgument
+Declare DllFunc "int tfe_KeepParameter(int, str) coengine"              tfe_KeepParameter
+
+; GUI
+Declare DllFunc "int tfe_DisplayMessage(str) coengine"                  tfe_DisplayMessage
+
+;# Declaration of Engine 6.0.58.0 constants.
+;##########################################
+
+; Error codes
+const codeWARN      = 0
+const codeERROR     = 1
+const codeCHCK      = 2
+const codeFATAL     = 3
+
+;#*****************************************************************************************
+;#  Function    :   HandleInvalidEngineStart
+;#
+;#  Description :   This function handles an invalid start of Engine 6.0. It displays a
+;#                  message box stating Engine 6.0 could not be started and starts up
+;#                  Notepad showing error.log, the file that has the details about why
+;#                  the Engine could not be started.
+;#
+;#  Parameters  :   strIniFile      string containing engine ini file
+;#
+;#  Return      :   -
+;#*****************************************************************************************
+function HandleInvalidEngineStart( strIniFile )
+
+    var strTitle,       ; title of message box
+        strMessage      ; message to display
+
+    ; Create the message to display.
+    strTitle    = "ENGINE 6.0 COULD NOT BE STARTED"
+    strMessage  = c"Possible reasons why Engine 6.0 could not be started:\n"
+    strMessage  = strMessage + c"\n"
+    strMessage  = strMessage + c"* the specified cluster could not be opened.\n"
+    strMessage  = strMessage + c"* the license file license.key could not be found.\n"
+    strMessage  = strMessage + c"* the license file contains an invalid license key.\n"
+    strMessage  = strMessage + c"* one or more settings of Engine 6.0 as set in the ini file\n"
+    strMessage  = strMessage + c"  '" + strIniFile + c"' are invalid.\n"
+    strMessage  = strMessage + c"\n"
+    strMessage  = strMessage + "Check the file error.log in the working directory for more details."
+
+    ; Display the message.
+    msgbox( strTitle, strMessage, "ok exclamation" )
+
+    ; Call Notepad to display the file error.log.
+    exec( "notepad " + curdir() + "\error.log" )
+
+end function
+
+
+;#*****************************************************************************************
+;#  Function    :   ProcessCluster
+;#
+;#  Description :   This function processes the cluster strClusterFile using settings from
+;#                  the ini file strIniFile. When the cluster is finished a report
+;#                  strReportFile is generated.
+;#
+;#  Parameters  :   strClusterFile  string containing cluster file
+;#                  strReportFile   string containing report file
+;#                  strIniFile      string containing engine ini file
+;#
+;#  Return      :   1   Engine 6.0 successfully processed cluster
+;#                  0   Engine 6.0 could not be started
+;#*****************************************************************************************
+function ProcessCluster( strClusterFile, strReportFile, strIniFile ) : var
+
+    var nResult,    ; result of ProcessCluster
+        i           ; counter
+
+    ; Start the engine.
+    nResult = tfe_StartEngine( strClusterFile, strReportFile, strIniFile )
+
+    ; Determine if tfe_StartEngine was successful.
+    if ( nResult = 1 )
+
+        ; Process each test line until none are left.
+        while ( tfe_ProcessNextLine() != 0 )
+
+            ; Execute the action word script.
+            run( tfe_GetActionWordScript() )
+
+        wend
+
+        ; Stop the engine and generate the report.
+        tfe_StopEngine()
+        tfe_GenerateReport()
+
+    else
+
+        ; Handle the invalid start of the Engine.
+        HandleInvalidEngineStart( strIniFile )
+
+    endif
+
+    return nResult
+
+end function

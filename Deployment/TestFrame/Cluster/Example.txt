@@ -1,0 +1,94 @@
+document	Example cluster				
+version	1,3				
+date	februari 21, 2008				
+author	Logica Engine Team				
+					
+scenario	Try some basic report functionality.				
+					
+	first number	second number	third number		
+print some numbers	1	2	3		
+					
+	expected message	recorded message			
+perform a check	correct	wrong			
+					
+	error message				
+print an error	Just an error message				
+					
+scenario	Try report functionality combined with argument commands.				
+					
+	first number	second number	third number		
+print some numbers	&Alpha = 200	&Alpha + 8.2	&19.3 - 21.6		
+print some numbers	&Alpha / 4	&2e-5 * 3.14	&Beta = Alpha / 8		
+					
+	cluster variable	cluster variable			
+export variable	Beta	Alpha			
+					
+	expected message	recorded message			
+perform a check	&This = "corr" + "ect"	&This			
+perform a check	&Empty				
+perform a check	&Empty	Some text			
+perform a check	&NotEmpty				
+perform a check	&NotEmpty	Some text			
+perform a check	&Anything				
+perform a check	&Anything	Some text			
+					
+	error message				
+print an error	&This + " or not!"				
+					
+scenario	Demonstrate the use of the continue token.				
+					
+	first number				
+print some numbers	11	&Cont			
+					
+	second number				
+&Cont	12	&Cont			
+					
+	third number				
+&Cont	13				
+					
+scenario	Try report functionality via a template.				
+					
+define template	try report functions	FirstNum	SecNum	ErrorText	
+					
+	first number	second number	third number		
+print some numbers	&FirstNum	&SecNum	12		
+print some numbers	&Beta = FirstNum	&50 - Beta	&Spaces(4)		
+					
+	error message				
+print an error	&ErrorText				
+					
+	expected date	second message			
+perform a check	17-1-2000	&Date("dd-mm-yy", FirstNum, SecNum, 0)			
+end template					
+					
+try report functions	2	5	completely wrong		
+try report functions	&Beta	-3	wrong again		
+					
+scenario	Demonstrate if-statement.				
+					
+set	&Name = "John"				
+					
+if	&Name	=	Steve		
+   print an error	The name should not be Steve.				
+else if	&Name	!=	John		
+   print an error	The name should be John.				
+else					
+	expected name	real name			
+   perform a check	John	&Name			
+end if					
+					
+scenario	Demonstrate repeat-loop.				
+					
+set	&Number = 0				
+					
+repeat	10				
+   print some numbers	&Number = Number + 1				
+end repeat					
+					
+scenario	Demonstrate while-loop.				
+					
+set	&Number = 0				
+					
+while	&Number	<	5		
+   print some numbers	&Number = Number + 1				
+end while					

@@ -1,0 +1,97 @@
+'################################################################################
+'#  EXAMPLE_LIB © 1999-2007 LogicaCMG NEDERLAND B.V.
+'#
+'#  Description     :   Library containing action word functions used in the
+'#                      example. In this script several action words functions
+'#                      are placed as well as a main function which calls the
+'#                      function corresponding with the current action word
+'#                      and which is executed first when this script is run
+'#                      by the Engine wrapper.
+'#  Version         :   6.0.58.0
+'#  Author          :   Leon Wolters, Andre hooijmans
+'#  Created on      :   10-02-2000
+'#  Last update on  :   06-02-2007
+'################################################################################
+
+' Include Engine wrapper
+'$Include: "EngineWrapper.sbh"
+
+'******************************************************************************
+'*  Procedure     :   print_some_numbers
+'*
+'*  Description   :   This function places the action word's first three
+'*                    parameters as comment in the report.
+'*
+'*  AW parameters :   1   first number
+'*                    2   second number
+'*                    3   third number
+'******************************************************************************
+Sub print_some_numbers
+
+    ' Report parameters 1, 2, and 3 as comment.
+    Call tfe.ReportComment( tfe.GetParameter( 1 ) )
+    Call tfe.ReportComment( tfe.GetParameter( 2 ) )
+    Call tfe.ReportComment( tfe.GetParameter( 3 ) )
+
+End Sub
+
+'******************************************************************************
+'*  Procedure     :   perform_a_check
+'*
+'*  Description   :   This function checks the action word's first parameter
+'*                    against the value of its second parameter.
+'*
+'*  AW parameters :   1   first message
+'*                    2   second message
+'******************************************************************************
+Sub perform_a_check
+
+    Call tfe.CheckParameter( 1, tfe.GetParameter( 2 ) )
+
+End Sub
+
+'******************************************************************************
+'*  Procedure     :   print_an_error
+'*
+'*  Description   :   This function reports the value of its first parameter as
+'*                    an error.
+'*
+'*  AW parameters :   1   error message
+'******************************************************************************
+Sub print_an_error
+
+    Call tfe.ReportError( tfe.GetParameter( 1 ), codeERROR )
+
+End Sub
+
+'******************************************************************************
+'*  Procedure   :   Main
+'*
+'*  Description :   This function is the main script of the Example_lib.
+'*                  It contains a switch in which for the action word,
+'*                  obtained from Engine 6.0 via the function tfe.GetActionWord,
+'*                  the correct action word function is called.
+'*                  Add your own action words with their corresponding
+'*                  functions to this switch.
+'******************************************************************************
+Sub Main
+
+    ' Call the corresponding action word function for the current action word.
+    Select Case tfe.GetActionWord
+    
+        Case "print some numbers"
+            print_some_numbers
+            
+        Case "perform a check"
+            perform_a_check
+            
+        Case "print an error"
+            print_an_error
+
+        Case Else
+            ' Action word unknown in this script.
+            Call tfe.ReportError( "Action word unknown in the script Example_lib.", codeERROR )
+
+    End Select
+
+End Sub

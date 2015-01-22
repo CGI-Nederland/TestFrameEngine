@@ -1,0 +1,37 @@
+;******************************************************************************
+;*$Workfile: EngGui.def $
+;*$Revision: 5 $
+;*$Modtime: 21-12-99 14:06 $
+;*$Author: Ws $
+;******************************************************************************
+;*
+;*	COPYRIGHT (C) 1999 CGI NEDERLAND B.V. - ALL RIGHTS RESERVED
+;*
+;******************************************************************************
+
+
+LIBRARY      "EngGui"
+;DESCRIPTION  'EngGui Windows Dynamic Link Library'
+
+EXPORTS
+    show_messagecenter	@1
+	
+	show_progress		@2
+	show_actionword		@3
+	show_checks			@4
+	show_cluster		@5
+	show_error			@6
+
+	show_message		@7
+
+	engine_paused		@8
+	engine_resumed		@9
+
+	register_stop		@10
+	register_pause		@11
+	register_resume		@12
+
+	enggui_init			@13
+	enggui_exit			@14
+
+;******************************************************************************

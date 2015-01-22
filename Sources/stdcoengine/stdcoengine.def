@@ -1,0 +1,104 @@
+;******************************************************************************
+;*$Workfile: stdcoengine.def $
+;*$Revision: 7 $
+;*$Modtime: 10/25/01 4:47p $
+;*$Author: Lw $
+;******************************************************************************
+;*
+;*	COPYRIGHT (C) 1999-2001 CGI NEDERLAND B.V. - ALL RIGHTS RESERVED
+;*
+;******************************************************************************
+
+
+LIBRARY "Stdcoengine"
+;DESCRIPTION "TestFrame Engine"
+
+EXPORTS
+;/////////////////////////////////////////
+;//	Action Word Registration
+;/////////////////////////////////////////
+
+	std_tfe_RegisterActionWord			@1
+	std_tfe_RegisterHeaderWord			@2
+	std_tfe_CreateActionWordSynonym		@3
+	std_tfe_UnregisterActionWord		@4
+	std_tfe_UnregisterHeaderWord		@5
+	std_tfe_UnregisterAllActionWords	@6
+
+
+;/////////////////////////////////////////
+;//	State Control
+;/////////////////////////////////////////
+
+	std_tfe_StartEngine					@50
+	std_tfe_StopEngine					@51
+	std_tfe_ResetEngine					@52
+
+;/////////////////////////////////////////
+;//	Report Generating
+;/////////////////////////////////////////
+
+	std_tfe_GenerateReport				@100
+	std_tfe_GenerateReportFromLog		@101
+
+;/////////////////////////////////////////
+;//	Testflow
+;/////////////////////////////////////////
+
+	std_tfe_ProcessNextLine				@150
+
+;/////////////////////////////////////////
+;//	Runtime Information
+;/////////////////////////////////////////
+
+	std_tfe_GetActionWord				@200
+	std_tfe_GetActionWordFunction		@201
+	std_tfe_GetArgument					@202
+	std_tfe_GetNumberOfArguments		@203
+	std_tfe_GetTestCase					@204
+	std_tfe_GetTestCondition			@205
+	std_tfe_GetSection					@206
+	std_tfe_GetScenario					@207
+	std_tfe_GetClusterFile				@208
+	std_tfe_GetLineNumber				@209
+	std_tfe_GetNumberOfErrors			@210
+	std_tfe_GetLatestError				@211
+	std_tfe_GetArgumentDescription		@212
+	std_tfe_GetCopyright				@213
+	std_tfe_GetVersion					@214
+	std_tfe_GetBuild					@215
+	std_tfe_GetParameter				@216
+	std_tfe_GetNumberOfParameters		@217
+	std_tfe_GetParameterDescription		@218
+	std_tfe_GetLogFile					@219
+
+;/////////////////////////////////////////
+;//	Reporting
+;/////////////////////////////////////////
+
+	std_tfe_ReportComment				@250
+	std_tfe_ReportError					@251
+
+;/////////////////////////////////////////
+;//	Checking
+;/////////////////////////////////////////
+
+	std_tfe_CheckString					@300
+	std_tfe_CheckArgument				@301
+	std_tfe_ReportCheck					@302
+	std_tfe_CheckParameter				@303
+
+;/////////////////////////////////////////
+;//	Cluster Variables
+;/////////////////////////////////////////
+
+	std_tfe_KeepArgument				@350
+	std_tfe_KeepParameter				@351
+
+;/////////////////////////////////////////
+;//	GUI
+;/////////////////////////////////////////
+
+	std_tfe_DisplayMessage				@400
+	std_ChartoBSTR						@500
+	

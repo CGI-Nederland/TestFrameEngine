@@ -1,0 +1,81 @@
+;******************************************************************************
+;*$Workfile: License.def $
+;*$Revision: 2 $
+;*$Modtime: 3-05-01 14:34 $
+;*$Author: Ws $
+;******************************************************************************
+;*
+;*	COPYRIGHT (C) 2001 CMG NEDERLAND B.V. - ALL RIGHTS RESERVED
+;*
+;******************************************************************************
+
+
+LIBRARY "license"
+DESCRIPTION "Engine License library"
+
+EXPORTS
+
+	lic_SetCustomerName				@10
+	lic_GetCustomerName				@11
+
+	lic_SetCompanyName				@12
+	lic_GetCompanyName				@13
+
+	lic_SetEngineLicenseNumber		@14
+	lic_GetEngineLicenseNumber		@15
+
+	lic_SetEngineVersion			@16
+	lic_GetEngineVersion			@17
+
+	lic_SetEngineSerialNumber		@18
+	lic_GetEngineSerialNumber		@19
+
+	lic_SetEngineCustomerType		@20
+	lic_GetEngineCustomerType		@21
+
+	lic_SetEngineLicenseType		@22
+	lic_GetEngineLicenseType		@23
+
+	lic_SetEngineTimeLock			@24
+	lic_GetEngineTimeLock			@25
+
+	lic_SetEngineNodeLock			@26
+	lic_GetEngineNodeLock			@27
+
+	lic_SetEngineKey				@28
+	lic_GetEngineKey				@29
+
+
+
+
+	lic_SetComponentName			@50
+	lic_GetComponentName			@51
+
+	lic_SetComponentLicenseNumber	@52
+	lic_GetComponentLicenseNumber	@53
+
+	lic_SetComponentVersion			@54
+	lic_GetComponentVersion			@55
+
+	lic_SetComponentSerialNumber	@56
+	lic_GetComponentSerialNumber	@57
+
+	lic_SetComponentCustomerType	@58
+	lic_GetComponentCustomerType	@59
+
+	lic_SetComponentLicenseType		@60
+	lic_GetComponentLicenseType		@61
+
+	lic_SetComponentEngineLicense	@62
+	lic_GetComponentEngineLicense	@63
+
+	lic_SetComponentTimeLock		@64
+	lic_GetComponentTimeLock		@65
+
+	lic_SetComponentNodeLock		@66
+	lic_GetComponentNodeLock		@67
+
+	lic_SetComponentKey				@68
+	lic_GetComponentKey				@69
+
+;/////////////////////////////////////////

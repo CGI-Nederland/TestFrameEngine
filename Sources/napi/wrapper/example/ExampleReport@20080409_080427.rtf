@@ -1,0 +1,368 @@
+{\rtf1\deflang1033 {\fonttbl{\f0\fswiss\fprq2 Arial;}{\f1\fmodern\fprq1 Courier New;}}{\colortbl\red0\green0\blue0;\red255\green0\blue0;\red63\green204\blue0;}\plain\pard\f0\fs20 ============================================================\par
+\fs24 \b \f0 Logica TestFrame-Test Execution Report\b0 \fs20 \par
+\par
+\cf0 \fs20 \f1 Licensed to     : Maurice Koster\par
+Company         : Logica\par
+Serial number   : 550-000820-0-01\par
+\par
+Engine version  : 6.1\par
+Engine build    : 60\par
+\par
+Document        : Example cluster\par
+Cluster version : 1,3\par
+Cluster date    : februari 21, 2008\par
+Cluster author  : Logica Engine Team\par
+\f0 ============================================================\par
+\par
+\fs24 \i \ul scenario\ul0     \ul Try some basic report functionality.\ul0 \fs20 \i0 \par
+\par
+9 :\tab print some numbers    1    2    3\par
+   \tab \i 1\i0 \par
+   \tab \i 2\i0 \par
+   \tab \i 3\i0 \par
+\par
+12 :\tab perform a check    correct    wrong\par
+\par
+    \tab \f1 Check of : \f0 expected message\par
+    \tab \f1 Expected : \f0 correct\par
+    \tab \f1 Recorded : \f0 wrong\par
+    \tab \f1 Result   : \f0 \cf1 failed\cf0 \par
+\par
+15 :\tab print an error    Just an error message\par
+\par
+    \tab \cf1 \b Error\b0  : Just an error message\cf0 \par
+\par
+\fs24 \i \ul scenario\ul0     \ul Try report functionality combined with argument commands.\ul0 \fs20 \i0 \par
+\par
+20 :\tab print some numbers    200    208.2    -2.3\par
+    \tab \i 200\i0 \par
+    \tab \i 208.2\i0 \par
+    \tab \i -2.3\i0 \par
+\par
+21 :\tab print some numbers    50    6.28e-005    25\par
+    \tab \i 50\i0 \par
+    \tab \i 6.28e-005\i0 \par
+    \tab \i 25\i0 \par
+\par
+24 :\tab \i Cluster variable "\b Beta\b0 " with value "\b 25\b0 " exported to keep file.\i0 \par
+    \tab \i Cluster variable "\b Alpha\b0 " with value "\b 200\b0 " exported to keep file.\i0 \par
+\par
+27 :\tab perform a check    correct    correct\par
+\par
+    \tab \f1 Check of : \f0 expected message\par
+    \tab \f1 Expected : \f0 correct\par
+    \tab \f1 Recorded : \f0 correct\par
+    \tab \f1 Result   : \f0 \cf2 passed\cf0 \par
+\par
+28 :\tab perform a check    \par
+\par
+    \tab \f1 Check of : \f0 expected message\par
+    \tab \f1 Expected : \f0 \par
+    \tab \f1 Recorded : \f0 \par
+    \tab \f1 Result   : \f0 \cf2 passed\cf0 \par
+\par
+29 :\tab perform a check        Some text\par
+\par
+    \tab \f1 Check of : \f0 expected message\par
+    \tab \f1 Expected : \f0 \par
+    \tab \f1 Recorded : \f0 Some text\par
+    \tab \f1 Result   : \f0 \cf1 failed\cf0 \par
+\par
+30 :\tab perform a check    &NotEmpty\par
+\par
+    \tab \f1 Check of : \f0 expected message\par
+    \tab \f1 Expected : \f0 &NotEmpty\par
+    \tab \f1 Recorded : \f0 \par
+    \tab \f1 Result   : \f0 \cf1 failed\cf0 \par
+\par
+31 :\tab perform a check    &NotEmpty    Some text\par
+\par
+    \tab \f1 Check of : \f0 expected message\par
+    \tab \f1 Expected : \f0 &NotEmpty\par
+    \tab \f1 Recorded : \f0 Some text\par
+    \tab \f1 Result   : \f0 \cf2 passed\cf0 \par
+\par
+32 :\tab perform a check    &Anything\par
+\par
+    \tab \f1 Check of : \f0 expected message\par
+    \tab \f1 Expected : \f0 &Anything\par
+    \tab \f1 Recorded : \f0 \par
+    \tab \f1 Result   : \f0 \cf2 passed\cf0 \par
+\par
+33 :\tab perform a check    &Anything    Some text\par
+\par
+    \tab \f1 Check of : \f0 expected message\par
+    \tab \f1 Expected : \f0 &Anything\par
+    \tab \f1 Recorded : \f0 Some text\par
+    \tab \f1 Result   : \f0 \cf2 passed\cf0 \par
+\par
+36 :\tab print an error    correct or not!\par
+\par
+    \tab \cf1 \b Error\b0  : correct or not!\cf0 \par
+\par
+\fs24 \i \ul scenario\ul0     \ul Demonstrate the use of the continue token.\ul0 \fs20 \i0 \par
+\par
+41 :\tab print some numbers    11    12    13\par
+    \tab \i 11\i0 \par
+    \tab \i 12\i0 \par
+    \tab \i 13\i0 \par
+\par
+\fs24 \i \ul scenario\ul0     \ul Try report functionality via a template.\ul0 \fs20 \i0 \par
+\par
+62 :\tab \i Template "\b try report functions\b0 " defined and exported to file "\b C:\\TestFrame\\Template\\try_report_functions.tpt\b0 ".\i0 \par
+\par
+64 :\tab try report functions    2    5    completely wrong\par
+\par
+64.4 :\tab print some numbers    2    5    12\par
+      \tab \i 2\i0 \par
+      \tab \i 5\i0 \par
+      \tab \i 12\i0 \par
+\par
+64.5 :\tab print some numbers    2    48        \par
+      \tab \i 2\i0 \par
+      \tab \i 48\i0 \par
+      \tab \i     \i0 \par
+\par
+64.8 :\tab print an error    completely wrong\par
+\par
+      \tab \cf1 \b Error\b0  : completely wrong\cf0 \par
+\par
+64.11 :\tab perform a check    17-1-2000    11-09-08\par
+\par
+       \tab \f1 Check of : \f0 expected date\par
+       \tab \f1 Expected : \f0 17-1-2000\par
+       \tab \f1 Recorded : \f0 11-09-08\par
+       \tab \f1 Result   : \f0 \cf1 failed\cf0 \par
+\par
+65 :\tab try report functions    25    -3    wrong again\par
+\par
+65.4 :\tab print some numbers    25    -3    12\par
+      \tab \i 25\i0 \par
+      \tab \i -3\i0 \par
+      \tab \i 12\i0 \par
+\par
+65.5 :\tab print some numbers    25    25        \par
+      \tab \i 25\i0 \par
+      \tab \i 25\i0 \par
+      \tab \i     \i0 \par
+\par
+65.8 :\tab print an error    wrong again\par
+\par
+      \tab \cf1 \b Error\b0  : wrong again\cf0 \par
+\par
+65.11 :\tab perform a check    17-1-2000    03-02-08\par
+\par
+       \tab \f1 Check of : \f0 expected date\par
+       \tab \f1 Expected : \f0 17-1-2000\par
+       \tab \f1 Recorded : \f0 03-02-08\par
+       \tab \f1 Result   : \f0 \cf1 failed\cf0 \par
+\par
+\fs24 \i \ul scenario\ul0     \ul Demonstrate if-statement.\ul0 \fs20 \i0 \par
+\par
+69 :\tab set    John\par
+\par
+71 :\tab \b if\b0 \par
+\tab \f1 Condition : \f0 John = Steve\par
+\tab \f1 Result    : \f0 \i false\i0 \par
+\par
+73 :\tab \b else if\b0 \par
+\tab \f1 Condition : \f0 John != John\par
+\tab \f1 Result    : \f0 \i false\i0 \par
+\par
+75 :\tab \b else\b0 \par
+\par
+77 :\tab perform a check    John    John\par
+\par
+    \tab \f1 Check of : \f0 expected name\par
+    \tab \f1 Expected : \f0 John\par
+    \tab \f1 Recorded : \f0 John\par
+    \tab \f1 Result   : \f0 \cf2 passed\cf0 \par
+\par
+78 :\tab \b end if\b0 \par
+\par
+\fs24 \i \ul scenario\ul0     \ul Demonstrate repeat-loop.\ul0 \fs20 \i0 \par
+\par
+82 :\tab set    0\par
+\par
+84 :\tab \b repeat\b0  ( 1 / 10 )\par
+\par
+85 :\tab print some numbers    1\par
+    \tab \i 1\i0 \par
+    \tab \i \i0 \par
+    \tab \i \i0 \par
+\par
+86 :\tab \b end repeat\b0 \par
+\par
+84 :\tab \b repeat\b0  ( 2 / 10 )\par
+\par
+85 :\tab print some numbers    2\par
+    \tab \i 2\i0 \par
+    \tab \i \i0 \par
+    \tab \i \i0 \par
+\par
+86 :\tab \b end repeat\b0 \par
+\par
+84 :\tab \b repeat\b0  ( 3 / 10 )\par
+\par
+85 :\tab print some numbers    3\par
+    \tab \i 3\i0 \par
+    \tab \i \i0 \par
+    \tab \i \i0 \par
+\par
+86 :\tab \b end repeat\b0 \par
+\par
+84 :\tab \b repeat\b0  ( 4 / 10 )\par
+\par
+85 :\tab print some numbers    4\par
+    \tab \i 4\i0 \par
+    \tab \i \i0 \par
+    \tab \i \i0 \par
+\par
+86 :\tab \b end repeat\b0 \par
+\par
+84 :\tab \b repeat\b0  ( 5 / 10 )\par
+\par
+85 :\tab print some numbers    5\par
+    \tab \i 5\i0 \par
+    \tab \i \i0 \par
+    \tab \i \i0 \par
+\par
+86 :\tab \b end repeat\b0 \par
+\par
+84 :\tab \b repeat\b0  ( 6 / 10 )\par
+\par
+85 :\tab print some numbers    6\par
+    \tab \i 6\i0 \par
+    \tab \i \i0 \par
+    \tab \i \i0 \par
+\par
+86 :\tab \b end repeat\b0 \par
+\par
+84 :\tab \b repeat\b0  ( 7 / 10 )\par
+\par
+85 :\tab print some numbers    7\par
+    \tab \i 7\i0 \par
+    \tab \i \i0 \par
+    \tab \i \i0 \par
+\par
+86 :\tab \b end repeat\b0 \par
+\par
+84 :\tab \b repeat\b0  ( 8 / 10 )\par
+\par
+85 :\tab print some numbers    8\par
+    \tab \i 8\i0 \par
+    \tab \i \i0 \par
+    \tab \i \i0 \par
+\par
+86 :\tab \b end repeat\b0 \par
+\par
+84 :\tab \b repeat\b0  ( 9 / 10 )\par
+\par
+85 :\tab print some numbers    9\par
+    \tab \i 9\i0 \par
+    \tab \i \i0 \par
+    \tab \i \i0 \par
+\par
+86 :\tab \b end repeat\b0 \par
+\par
+84 :\tab \b repeat\b0  ( 10 / 10 )\par
+\par
+85 :\tab print some numbers    10\par
+    \tab \i 10\i0 \par
+    \tab \i \i0 \par
+    \tab \i \i0 \par
+\par
+86 :\tab \b end repeat\b0 \par
+\par
+\fs24 \i \ul scenario\ul0     \ul Demonstrate while-loop.\ul0 \fs20 \i0 \par
+\par
+90 :\tab set    0\par
+\par
+92 :\tab \b while\b0 \par
+\tab \f1 Condition : \f0 0 < 5\par
+\tab \f1 Result    : \f0 \i true\i0 \par
+\tab \f1 Iteration : \f0 1\par
+\par
+93 :\tab print some numbers    1\par
+    \tab \i 1\i0 \par
+    \tab \i \i0 \par
+    \tab \i \i0 \par
+\par
+94 :\tab \b end while\b0 \par
+\par
+92 :\tab \b while\b0 \par
+\tab \f1 Condition : \f0 1 < 5\par
+\tab \f1 Result    : \f0 \i true\i0 \par
+\tab \f1 Iteration : \f0 2\par
+\par
+93 :\tab print some numbers    2\par
+    \tab \i 2\i0 \par
+    \tab \i \i0 \par
+    \tab \i \i0 \par
+\par
+94 :\tab \b end while\b0 \par
+\par
+92 :\tab \b while\b0 \par
+\tab \f1 Condition : \f0 2 < 5\par
+\tab \f1 Result    : \f0 \i true\i0 \par
+\tab \f1 Iteration : \f0 3\par
+\par
+93 :\tab print some numbers    3\par
+    \tab \i 3\i0 \par
+    \tab \i \i0 \par
+    \tab \i \i0 \par
+\par
+94 :\tab \b end while\b0 \par
+\par
+92 :\tab \b while\b0 \par
+\tab \f1 Condition : \f0 3 < 5\par
+\tab \f1 Result    : \f0 \i true\i0 \par
+\tab \f1 Iteration : \f0 4\par
+\par
+93 :\tab print some numbers    4\par
+    \tab \i 4\i0 \par
+    \tab \i \i0 \par
+    \tab \i \i0 \par
+\par
+94 :\tab \b end while\b0 \par
+\par
+92 :\tab \b while\b0 \par
+\tab \f1 Condition : \f0 4 < 5\par
+\tab \f1 Result    : \f0 \i true\i0 \par
+\tab \f1 Iteration : \f0 5\par
+\par
+93 :\tab print some numbers    5\par
+    \tab \i 5\i0 \par
+    \tab \i \i0 \par
+    \tab \i \i0 \par
+\par
+94 :\tab \b end while\b0 \par
+\par
+92 :\tab \b while\b0 \par
+\tab \f1 Condition : \f0 5 < 5\par
+\tab \f1 Result    : \f0 \i false\i0 \par
+\par
+94 :\tab \b end while\b0 \par
+\par
+============================================================\par
+\f1 Number of test lines : 66\par
+\par
+Succeeded test lines : \fs24 \cf1 86%\cf0 \fs20 \par
+\par
+Number of errors     : 4\par
+- Error              : 4\par
+Errors were at lines : 15, 36, 64.8, 65.8\par
+\par
+Number of checks     : 11\par
+- Passed checks      : 6\tab \tab  55%\par
+- Failed checks      : 5\tab \tab  45%\par
+Fails were at lines  : 12, 29, 30, 64.11, 65.11\par
+\par
+Start time           : Wed Apr 09 08:04:26 2008
+\par
+Stop time            : Wed Apr 09 08:04:26 2008
+\par
+Time used            : 00:00:00:688\par
+\f0 ============================================================\par
+\fs16 \par
+TestFrame Engine v2008.04. Copyright (C) 1999-2008 Logica Nederland B.V. All rights reserved.\fs20 }

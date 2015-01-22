@@ -1,0 +1,113 @@
+//(Description) = 
+//(Comment) = 
+
+;##########################################################################################
+;#  EXAMPLE_LIB © 1999-2007 LogicaCMG NEDERLAND B.V.
+;#
+;#  Description     :   Library containing action word functions used in the example.
+;#                      In this script several action words functions are placed as well
+;#                      as a main function which calls the function corresponding with the
+;#                      current action word, and which is executed first when this script
+;#                      is run by the Engine wrapper's function ProcessCluster.
+;#  Version         :   6.0.58.0
+;#  Author          :   Leon Wolters, Andre Hooijmans
+;#  Created on      :   18-01-2000
+;#  Last update on  :   06-02-2007
+;##########################################################################################
+
+; Include the Engine wrapper so the interface functions and
+; global variables are known in this script.
+include "EngineWrapper"
+
+;#*****************************************************************************************
+;#  Function      :   print_some_numbers
+;#
+;#  Description   :   This function places the action word's first three parameters as
+;#                    comment in the report.
+;#
+;#  AW parameters :   1   first number
+;#                    2   second number
+;#                    3   third number
+;#*****************************************************************************************
+function print_some_numbers()
+
+    ; Report parameters 1, 2, and 3 as comment.
+    tfe_ReportComment( tfe_GetParameter( 1 ) )
+    tfe_ReportComment( tfe_GetParameter( 2 ) )
+    tfe_ReportComment( tfe_GetParameter( 3 ) )
+
+    ; Wait 500 ms so this example takes several seconds at least.
+    wait( 500, "ms" )
+
+end function
+
+;#*****************************************************************************************
+;#  Function      :   perform_a_check
+;#
+;#  Description   :   This function checks the action word's first parameter against the
+;#                    value of its second parameter.
+;#
+;#  AW parameters :   1   first message
+;#                    2   second message
+;#*****************************************************************************************
+function perform_a_check()
+
+    ; Check parameter 1 against the value of parameter 2.
+    tfe_CheckParameter( 1, tfe_GetParameter( 2 ) )
+
+    ; Wait 500 ms so this example takes several seconds at least.
+    wait( 500, "ms" )
+
+end function
+
+;#*****************************************************************************************
+;#  Function      :   print_an_error
+;#
+;#  Description   :   This function reports the value of its first parameter as an error.
+;#
+;#  AW parameters :   1   error message
+;#*****************************************************************************************
+function print_an_error()
+
+    ; Report the value of parameter 1 as an error with code codeERROR.
+    tfe_ReportError( tfe_GetParameter(1), codeERROR )
+
+    ; Wait 500 ms so this example takes several seconds at least.
+    wait( 500, "ms" );
+
+end function
+
+;#*****************************************************************************************
+;#  Function    :   Main
+;#
+;#  Description :   This function is the main script of the Example_lib. It contains a
+;#                  switch in which for the action word, obtained from the Engine via the
+;#                  function tfe_GetActionWord, the correct action word function is called.
+;#                  Add your own action words with their corresponding functions to
+;#                  this switch.
+;#
+;#  Arguments   :   -
+;#
+;#  Return      :   -
+;#*****************************************************************************************
+function Main
+
+    ; Call the corresponding action word function for the current action word.
+    switch tfe_GetActionWord()
+
+        case "print some numbers"
+            print_some_numbers()
+
+        case "perform a check"
+            perform_a_check()
+
+        case "print an error"
+            print_an_error()
+
+        default
+            ; Action word unknown in this script.
+            tfe_ReportError( "Action word unknown in the script Example_lib.", codeERROR )
+
+    end switch
+
+end function

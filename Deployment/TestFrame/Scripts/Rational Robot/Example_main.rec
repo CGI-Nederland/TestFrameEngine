@@ -1,0 +1,69 @@
+'##############################################################################
+'#  EXAMPLE_MAIN © 1999-2007 LogicaCMG NEDERLAND B.V.
+'#
+'#  Description     :   Main script for the example
+'#  Version         :   6.0.58.0
+'#  Author          :   Leon Wolters, Edwin Torn Broers, Andre Hooijmans
+'#  Created on      :   10-02-2000
+'#  Last update on  :   06-02-2007
+'##############################################################################
+
+' Include Engine wrapper.
+'$Include: "EngineWrapper.sbh"
+
+' Declare constants.
+Global const TFPATH = "C:\TestFrame\"
+
+' WordPad path.
+Global const WORDPAD = "C:\Program Files\Windows NT\Accessories\Wordpad.exe"
+
+'******************************************************************************
+'*  Procedure   :   RegisterActionWords
+'*
+'*  Description :   This procedure registers the action words used in the test.
+'*                  Include the registration of your own action words here.
+'*****************************************************************************************
+Sub RegisterActionWords
+
+    Call tfe.RegisterActionWord( "print some numbers", "Example_lib" )
+    Call tfe.RegisterActionWord( "perform a check", "Example_lib" )
+    Call tfe.RegisterActionWord( "print an error", "Example_lib" )
+    
+End Sub
+
+'******************************************************************************
+'*  Procedure   :   Main
+'*
+'*  Description :   Main procedure of the test.
+'*****************************************************************************************
+Sub Main
+
+    Dim strClusterFile As String    ' name and path of cluster file
+    Dim strReportFile As String     ' name and path of report file
+    Dim strIniFile As String        ' name and path of ini file
+
+    ' Create engine object
+    set tfe = CreateObject ("TestFrame.Engine")
+
+    ' Reset the Engine in case previous scripts were ended abnormally.
+    Call tfe.ResetEngine
+
+    ' Register action words.
+    RegisterActionWords
+
+    ' Define cluster, report and ini file.
+    strClusterFile  = TFPATH + "Cluster\Example.txt"
+    strReportFile   = TFPATH + "Report\ExampleReport.rtf"
+    strIniFile      = TFPATH + "engine.ini"
+    
+    ' Start processing the cluster; call the function ProcessCluster from the wrapper.
+    Call ProcessCluster( strClusterFile, strReportFile, strIniFile )
+
+    ' Destroy engine
+    set tfe = nothing
+    
+    ' Call report - include the correct application to view the report
+    ' and the correct report file.
+    StartApplication WORDPAD + " " + strReportFile
+    
+End Sub

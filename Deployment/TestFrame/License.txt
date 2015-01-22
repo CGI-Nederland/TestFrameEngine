@@ -1,0 +1,43 @@
+TestFrame Engine
+================ 
+
+COPYRIGHT
+Copyright © 1999–2008 Logica Nederland B.V. All rights reserved. 
+
+LICENCE AGREEMENT
+By downloading and/or in any way using this software you indicate that
+you do accept this license agreement. If you are unable or unwilling to 
+accept this license agreement then you may not use this software and 
+must return and/or destroy all copies of the TestFrame engine in your 
+possession.
+
+To use the engine, a valid license key is required. A trial license key 
+can be obtained by sending an e-mail to: ccctesting@logica.com
+
+YOU MAY NOT
+- Rent, sublicense, lease and sell any version or edition of this software
+  or any portion of it including the license without the explicit written 
+  permission from Logica.
+
+- Copy, share and distribute the TestFrame engine software or any 
+  portion of it including the license without the explicit written 
+  permission from Logica.
+
+- Decompile, disassemble, reverse engineer, modify, clone and emulate
+  any version or edition of the TestFrame Engine software or any portion
+  of it including the license.
+
+- Use the TestFrame Engine software if you are not a registered user.
+
+TERM AND TERMINATION
+You may terminate this license agreement at any time by returning or
+destroying all copies of the TestFrame Engine in your possession and
+notifying Logica.
+
+This license agreement will terminate immediately if you infringe upon
+Logica's copyrights or breach this agreement. Copyright 
+infringement or breaching this agreement may also result in criminal 
+or civil prosecution.
+
+DISCLAIMER OF WARRANTY
+This software is provided "as is" without express or implied warranty.
