@@ -1,11 +1,6 @@
 /*****************************************************************************
- * $Workfile: Check.cpp $
- * $Revision: 2 $
- * $Modtime: 18-10-99 14:57 $
- * $Author: Mn $
- ******************************************************************************
  *
- *	COPYRIGHT (C) 1999 CGI NEDERLAND B.V. - ALL RIGHTS RESERVED
+ *	COPYRIGHT (C) 2015 CGI NEDERLAND B.V. - ALL RIGHTS RESERVED
  *
  ******************************************************************************/
 // Disable Visual C++ warning, function name in debugfile is truncated

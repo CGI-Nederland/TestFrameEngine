@@ -30,3 +30,7 @@
 *.tlog
 *.lastbuildstate
 *.unsuccessfulbuild
+
+*.idb
+//Debug///
+*.opensdf

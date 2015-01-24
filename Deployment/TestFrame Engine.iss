@@ -14,7 +14,7 @@
 AppName=TestFrame Engine
 AppVerName=TestFrame Engine v{#TF_Engine_Version} (Build {#TF_Engine_Build})
 AppPublisher=CGI, Nederland BV 
-AppCopyright=Copyright (C) 1997-2013 CGI, Nederland BV
+AppCopyright=Copyright (C) 1997-2015 CGI, Nederland BV 
 AppPublisherURL=http://www.nl.cgi.com/ 
 AppSupportURL=http://www.nl.cgi.com/       
 AppSupportPhone=+31(0)88 56 45360 
