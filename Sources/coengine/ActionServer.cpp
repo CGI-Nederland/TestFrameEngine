@@ -5,7 +5,7 @@
  * $Author: Lw, AH $
  ******************************************************************************
  *
- *	COPYRIGHT (C) 1999-2001 CGI NEDERLAND B.V. - ALL RIGHTS RESERVED
+ *	COPYRIGHT (C) 1999-2015 CGI NEDERLAND B.V. - ALL RIGHTS RESERVED
  *
  ******************************************************************************/
 
