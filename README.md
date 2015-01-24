@@ -9,7 +9,7 @@ Download and install the Visual Studio 2013 Community Edition
 
 Download extra library for multibyte support:
 
-(Multibyte MFC Library for Visual Studio 2013)[http://www.microsoft.com/en-us/download/details.aspx?id=40770]
+[Multibyte MFC Library for Visual Studio 2013](http://www.microsoft.com/en-us/download/details.aspx?id=40770)
 
 
 # Tips
