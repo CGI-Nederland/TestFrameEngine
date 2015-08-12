@@ -1630,8 +1630,15 @@ void					Command::FinishProcessing()
 	if (m_pMasterServer != 0)
 	{ m_pMasterServer->Stop(); }
 	
-	// Delete GUI thread
-	delete m_pGUIThread; // causes jni to hang already in destructor
+
+	if (::WaitForSingleObject(m_pGUIThread, 1) != WAIT_OBJECT_0)
+	{
+		TerminateThread(m_pGUIThread, 0);
+	}
+	CloseHandle(m_pGUIThread);
+
+
+	//delete m_pGUIThread; // causes jni to hang already in destructor
 	m_pGUIThread = 0;
 }
 

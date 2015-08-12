@@ -37,6 +37,7 @@ void PrintSomeNumbers();
 void PerformACheck();
 void PrintAnError();
 void GetTestCondition();
+void Bug();
 
 ///////////////////////////////////////////////////////////////////////////////
 // NAPI Functions
@@ -68,6 +69,8 @@ void					InitialiseNAPI()
 	napi_AddActionWord("perform a check",		"PerformACheck",	&PerformACheck);
 	napi_AddActionWord("print an error",		"PrintAnError",		&PrintAnError);
 	napi_AddActionWord("tfe_GetTestCondition",  "GetTestCondition",  &GetTestCondition);
+
+	napi_AddActionWord("bug", "Bug", &Bug);
 }
 
 //						===========
@@ -111,6 +114,13 @@ void					PrintAnError()
 void GetTestCondition()
 {
 	tfe_ReportComment(tfe_GetTestCondition());
+}
+
+void Bug()
+{
+	tfe_ReportComment(tfe_GetParameter(1));
+	tfe_ReportComment(tfe_GetParameter(2));
+	tfe_ReportComment(tfe_GetParameter(3));
 }
 
 ///////////////////////////////////////////////////////////////////////////////

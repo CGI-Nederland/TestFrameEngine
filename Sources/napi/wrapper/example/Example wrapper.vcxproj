@@ -144,6 +144,12 @@
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y $(ProjectDir)..\..\*.ini $(OutDir)</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>Copy INI files</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
@@ -327,7 +333,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Example.ini" />
-    <None Include="..\..\ExampleDebug.ini" />
+    <None Include="..\..\ExampleDebug.ini">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\coengine\Coengine.vcxproj">
