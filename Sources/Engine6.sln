@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Coengine", "coengine\Coengine.vcxproj", "{5D3C2E98-BB7D-4499-B8D0-7BF1C6779ADB}"
 EndProject
@@ -21,6 +21,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Example dll", "napi\navigation\example\Example dll.vcxproj", "{BF913008-17A7-4F1E-8791-AEC74A484081}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Example wrapper", "napi\wrapper\example\Example wrapper.vcxproj", "{AD9EDF7F-9687-4C12-B204-5045ADF141EB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BF913008-17A7-4F1E-8791-AEC74A484081} = {BF913008-17A7-4F1E-8791-AEC74A484081}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Deployment", "..\Deployment\Deployment.vcxproj", "{436B50A6-DD1A-4A88-AEBF-8E98B35E88A6}"
 EndProject
