@@ -36,3 +36,6 @@ Debug
 Release
 *.opensdf
 *.manifest
+
+~*.doc
+Engine6.sdf
